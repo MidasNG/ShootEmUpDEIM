@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform bulletParent;
     private float yMax, xMax, reload, reloadMod;
     private Rigidbody2D rb;
+
     void Start()
     {
         yMax = Camera.main.orthographicSize;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         reloadMod = 4;
         rb = GetComponent<Rigidbody2D>();
     }
+
     void Update()
     {
         reload = Mathf.Clamp(reload + Time.deltaTime * reloadMod, 0, 1);
@@ -26,11 +28,17 @@ public class PlayerController : MonoBehaviour
             reload = 0;
         }
     }
+
     private void FixedUpdate()
     {
         rb.AddForce(transform.right * Input.GetAxis("Vertical") * force);
         rb.AddTorque(-Input.GetAxis("Horizontal") * torque);
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xMax, xMax), Mathf.Clamp(transform.position.y, -yMax, yMax), 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
     }
 }
