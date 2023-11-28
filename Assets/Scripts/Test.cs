@@ -1,19 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody2D rigidBody;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private float force = 5f;
+    private void Awake()
     {
-        print("Hello world!");
-        print("World: Hello script!");
+        rigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.Space)) 
+        {
+            rigidBody.AddForce(new Vector2(0, force));
+        }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        spriteRenderer.color = new Color(1, 0, 0);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.color = new Color(1, 1, 1);
+    }
+
 }

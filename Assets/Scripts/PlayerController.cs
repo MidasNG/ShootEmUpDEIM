@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed, rotateSpeed;
+    [SerializeField] private float force = 5, torque = 5;
     [SerializeField] private BulletBehaviour bullet;
     [SerializeField] private Transform bulletParent;
-    private float yMax, xMax;
+    private float yMax, xMax, reload, reloadMod;
+    private Rigidbody2D rb;
     void Start()
     {
         yMax = Camera.main.orthographicSize;
         xMax = yMax / 9 * 16;
+        reload = 0;
+        reloadMod = 4;
+        rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
-        if (Input.GetAxis("Vertical") != 0) transform.Translate(Input.GetAxis("Vertical") * speed * Time.deltaTime, 0, 0);
-        if (Input.GetAxis("Horizontal") != 0) transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed);
-
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xMax, xMax), Mathf.Clamp(transform.position.y, -yMax, yMax), 0);
+        reload = Mathf.Clamp(reload + Time.deltaTime * reloadMod, 0, 1);
+        if (Input.GetAxis("Fire") > 0 && reload == 1)
+        {
+            Instantiate(bullet, transform.right / 2 + transform.position, transform.rotation, bulletParent);
+            reload = 0;
+        }
     }
     private void FixedUpdate()
     {
-        if (Input.GetAxis("Fire") > 0) Instantiate(bullet, transform.right / 2 + transform.position, Quaternion.Euler(transform.eulerAngles / 2), bulletParent);
+        rb.AddForce(transform.right * Input.GetAxis("Vertical") * force);
+        rb.AddTorque(-Input.GetAxis("Horizontal") * torque);
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xMax, xMax), Mathf.Clamp(transform.position.y, -yMax, yMax), 0);
     }
 }
