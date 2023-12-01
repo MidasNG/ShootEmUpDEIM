@@ -6,6 +6,7 @@ public class AsteroidBehaviour : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody2D rb;
+    [SerializeField] private Score score;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class AsteroidBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        score.ScoreUp();
         Destroy(gameObject);
     }
 }
