@@ -6,7 +6,7 @@ public class AsteroidBehaviour : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody2D rb;
-    [SerializeField] private Score score;
+    [SerializeField] private GameLogic score;
 
     void Start()
     {

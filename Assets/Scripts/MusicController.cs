@@ -6,17 +6,15 @@ using UnityEngine.Audio;
 public class MusicController : MonoBehaviour
 {
     AudioSource musicSource;
-    public AudioClip clip;
     public AudioMixer mixer;
     void Start()
     {
-        musicSource = GetComponent<AudioSource>();    
+        musicSource = GetComponent<AudioSource>();   
     }
 
-    // Update is called once per frame
     void Update()
     {
-        mixer.SetFloat("Lowpass Cutoff freq", 500);
-        //musicSource.PlayOneShot(clip);
+        if (Time.timeScale == 0) mixer.SetFloat("Lowpass Cutoff freq", 1000);
+        else mixer.SetFloat("Lowpass Cutoff freq", 22000);
     }
 }
