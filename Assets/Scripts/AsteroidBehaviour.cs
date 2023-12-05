@@ -5,8 +5,9 @@ using UnityEngine;
 public class AsteroidBehaviour : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private Rigidbody2D rb;
     [SerializeField] private GameLogic score;
+    private sfxController sfxController;
+    private Rigidbody2D rb;
 
     void Start()
     {
@@ -26,7 +27,14 @@ public class AsteroidBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        score.ScoreUp();
         Destroy(gameObject);
+        score.ScoreUp();
+        sfxController.DestroySFX();
+    }
+
+    public void SetSFXControllerAndGameLogic(sfxController sfxController, GameLogic gameLogic)
+    {
+        this.sfxController = sfxController;
+        score = gameLogic;
     }
 }

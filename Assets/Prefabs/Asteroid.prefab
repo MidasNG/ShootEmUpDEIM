@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.7
   score: {fileID: 792801912728027437, guid: d23eaf71e2e22eb48b926cd43c501273, type: 3}
+  sfxController: {fileID: 7439051052296459425, guid: 8bfe338ecf9d42b4cba93abddb74c053, type: 3}
 --- !u!50 &4408461004443478701
 Rigidbody2D:
   serializedVersion: 4

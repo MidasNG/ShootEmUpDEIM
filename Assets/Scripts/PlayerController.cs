@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float force = 5, torque = 5;
     [SerializeField] private BulletBehaviour bullet;
     [SerializeField] private Transform bulletParent;
-    [SerializeField] private sfxController sfx;
+    [SerializeField] private sfxController sfxController;
     [SerializeField] private GameLogic gameLogic;
     private float yMax, xMax, reload, reloadMod;
     private Rigidbody2D rb;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(bullet, transform.right / 2 + transform.position, transform.rotation, bulletParent);
             reload = 0;
-            sfx.Shoot();
+            sfxController.ShootSFX();
         }
     }
 

@@ -5,15 +5,20 @@ using UnityEngine;
 public class sfxController : MonoBehaviour
 {
     private AudioSource sfxSource;
-    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip shootSound, destroySound;
 
     void Start()
     {
         sfxSource = GetComponent<AudioSource>();
     }
 
-    public void Shoot()
+    public void ShootSFX()
     {
         sfxSource.PlayOneShot(shootSound);
+    }
+
+    public void DestroySFX()
+    {
+        sfxSource.PlayOneShot(destroySound);
     }
 }
