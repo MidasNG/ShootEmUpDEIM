@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float force = 5, torque = 5;
+    [SerializeField] private float force = 10, torque = 5;
     [SerializeField] private BulletBehaviour bullet;
     [SerializeField] private Transform bulletParent;
     [SerializeField] private sfxController sfxController;
     [SerializeField] private GameLogic gameLogic;
+    private SpaceshipPivot rotation;
     private float yMax, xMax, reload, reloadMod;
     private Rigidbody2D rb;
 
